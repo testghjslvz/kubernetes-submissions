@@ -14,9 +14,7 @@ func main() {
 
 	fmt.Printf("Server started on port %s\n", port)
 
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Todo app running on port %s", port)
-	})
+	http.Handle("/", http.FileServer(http.Dir("./frontend")))
 
 	http.ListenAndServe(":"+port, nil)
 }
